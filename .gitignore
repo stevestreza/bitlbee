@@ -1,0 +1,4 @@
+*.o
+Makefile.settings
+config.h
+bitlbee.pc
