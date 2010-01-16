@@ -141,43 +141,47 @@ void strip_html( char *in )
 				if( g_strncasecmp( cs+1, "br", 2) == 0 )
 					*(s++) = '\n';
 				in ++;
-			} else if ( g_strncasecmp( cs+1, "a ", 2) == 0){
-                size_t base = 3;
+			} else if ( g_strncasecmp( cs+1, "a href=\"", 8) == 0){
+                printf("Detected a link!\n");
+                size_t base = 9;
 			     //links come in the form of:
 			     //<A HREF="http://apple.com/">Apple</A>
-			     if( *(cs+base+0) == 'H' &&
- 			         *(cs+base+1) == 'R' &&
- 			         *(cs+base+2) == 'E' &&
- 			         *(cs+base+3) == 'F' &&
-      			     *(cs+base+4) == '=' &&
-      			     *(cs+base+5) == '"'    ){
-                        size_t linkLength = 0;
-                        char *linkStart = (cs+base+6);
-                        char *linkEnd = linkStart;
-                        while(*linkEnd && *linkEnd != '"'){
-                            linkEnd++;
-                            linkLength++;
-                        }
-
-                        size_t contentStart = base + 6 + linkLength + 2;
-                        size_t contentLength = 0;
-                        char *content = cs+contentStart;
-                        char *contentEnd = content;
-                        while(*contentEnd && *contentEnd != '"'){
-                            contentEnd++;
-                            contentLength++;
-                        }
-                        
-                        *(s++) = "[";
-                        strncpy(s+1, content, contentLength);
-                        s+=contentLength + 1;
-                        *(s++) = "]";
-
-                        *(s++) = "(";
-                        strncpy(s+1, linkStart, linkLength);
-                        s+=linkLength + 1;
-                        *(s++) = ")";
-      			     }
+                 size_t linkLength = 0;
+                 char *linkStart = (cs+base);
+                 char *linkEnd = linkStart;
+                 while(*linkEnd && *linkEnd != '"'){
+                     linkEnd++;
+                     linkLength++;
+                 }
+                 
+                 char *linkURL = g_malloc(sizeof(char) * linkLength + 1);
+                 strncpy(linkURL, linkStart, linkLength);
+                 linkURL[linkLength] = (char)0;
+                 printf("Link URL: %s\n", linkURL);
+                 
+                 size_t contentStart = base + linkLength + 2;
+                 size_t contentLength = 0;
+                 char *content = cs+contentStart;
+                 char *contentEnd = content;
+                 while(*contentEnd && *contentEnd != '"'){
+                     contentEnd++;
+                     contentLength++;
+                 }
+                 
+                 char *linkName = g_malloc(sizeof(char) * contentLength + 1);
+                 strncpy(linkName, content, contentLength);
+                 linkName[contentLength] = (char)0;
+                 printf("Link name: %s\n", linkName);
+                 
+                 *(s++) = "[";
+                 strncpy(s+1, linkName, contentLength);
+                 s+=contentLength + 1;
+                 *(s++) = "]";
+                 
+                 *(s++) = "(";
+                 strncpy(s+1, linkURL, linkLength);
+                 s+=linkLength + 1;
+                 *(s++) = ")";
 			     
                 in ++;
 			} else {
