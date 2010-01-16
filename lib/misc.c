@@ -115,6 +115,7 @@ static const htmlentity_t ent[] =
 
 void strip_html( char *in )
 {
+	// TODO pluginize
 	char *start = in;
 	char *out = g_malloc( strlen( in ) + 1 );
 	char *s = out, *cs;
