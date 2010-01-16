@@ -11,8 +11,8 @@
 # [SH] Program variables
 objects = yahoo.o crypt.o libyahoo2.o yahoo_fn.o yahoo_httplib.o yahoo_util.o
 
-CFLAGS += -Wall -DSTDC_HEADERS -DHAVE_STRING_H -DHAVE_STRCHR -DHAVE_MEMCPY -DHAVE_GLIB
-LFLAGS += -r
+CFLAGS += -Wall -DSTDC_HEADERS -DHAVE_STRING_H -DHAVE_STRCHR -DHAVE_MEMCPY -DHAVE_GLIB -arch i386
+LFLAGS += -r -arch i386
 
 # [SH] Phony targets
 all: yahoo_mod.o

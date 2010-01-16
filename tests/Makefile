@@ -1,6 +1,7 @@
 -include ../Makefile.settings
 
-LFLAGS +=-lcheck
+LFLAGS +=-lcheck -arch i386
+CFLAGS += -arch i386
 
 all: check 
 	./check $(CHECKFLAGS)

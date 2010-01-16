@@ -11,8 +11,8 @@
 # [SH] Program variables
 objects = msn.o msn_util.o ns.o passport.o sb.o tables.o
 
-CFLAGS += -Wall
-LFLAGS += -r
+CFLAGS += -Wall -arch i386
+LFLAGS += -r -arch i386
 
 # [SH] Phony targets
 all: msn_mod.o

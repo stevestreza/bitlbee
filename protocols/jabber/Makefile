@@ -11,8 +11,8 @@
 # [SH] Program variables
 objects = conference.o io.o iq.o jabber.o jabber_util.o message.o presence.o sasl.o
 
-CFLAGS += -Wall
-LFLAGS += -r
+CFLAGS += -Wall -arch i386
+LFLAGS += -r -arch i386
 
 # [SH] Phony targets
 all: jabber_mod.o

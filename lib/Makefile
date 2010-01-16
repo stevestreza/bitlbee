@@ -11,8 +11,8 @@
 # [SH] Program variables
 objects = arc.o base64.o $(EVENT_HANDLER) http_client.o ini.o md5.o misc.o proxy.o sha1.o $(SSL_CLIENT) url.o xmltree.o
 
-CFLAGS += -Wall
-LFLAGS += -r
+CFLAGS += -Wall -arch i386
+LFLAGS += -r -arch i386
 
 # [SH] Phony targets
 all: lib.o

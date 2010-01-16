@@ -25,7 +25,8 @@ endif
 
 # Expansion of variables
 subdirobjs = $(foreach dir,$(subdirs),$(dir)/$(dir).o)
-CFLAGS += -Wall
+CFLAGS += -Wall -arch i386
+LFLAGS += -arch i386 
 
 all: $(OUTFILE)
 	$(MAKE) -C doc

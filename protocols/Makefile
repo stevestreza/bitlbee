@@ -20,8 +20,8 @@ subdirobjs = $(PROTOOBJS)
 
 # Expansion of variables
 subdirobjs := $(join $(subdirs),$(addprefix /,$(subdirobjs)))
-CFLAGS += -Wall
-LFLAGS += -r
+CFLAGS += -Wall -arch i386
+LFLAGS += -r -arch i386
 
 # [SH] Phony targets
 all: protocols.o
